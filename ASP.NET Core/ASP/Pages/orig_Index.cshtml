@@ -1,0 +1,57 @@
+@page
+@using ASP.Models
+<style >
+.title {
+  width: 100%;
+  text-align: center;
+  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  text-decoration: underline;
+}
+</style>
+
+
+@(Html.DevExtreme().Button().Text("Get All Filtered And Sorted Data").OnClick("getFilteredAndSortedData"))
+
+@(Html.DevExtreme().DataGrid<SampleOrder>().ID("gridContainer")
+    .ShowBorders(true)
+    .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("Get").Key("OrderID"))
+    .Columns(columns => {
+        columns.AddFor(m => m.OrderID);
+        columns.AddFor(m => m.OrderDate);
+        columns.AddFor(m => m.CustomerName);
+        columns.AddFor(m => m.ShipCountry);
+        columns.AddFor(m => m.ShipCity);
+    })
+    .FilterRow(f => f.Visible(true))
+    .SearchPanel(r => r.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+)
+<br />
+<div class="title">Loaded data</div>
+<br />
+@(Html.DevExtreme().DataGrid<SampleOrder>().ID("gridContainer2")
+    .ShowBorders(true)
+    .Columns(columns => {
+        columns.AddFor(m => m.OrderID);
+        columns.AddFor(m => m.OrderDate);
+        columns.AddFor(m => m.CustomerName);
+        columns.AddFor(m => m.ShipCountry);
+        columns.AddFor(m => m.ShipCity);
+    })
+)
+<script>;
+    function getFilteredAndSortedData(){
+		  const grid = $('#gridContainer').dxDataGrid("instance");
+		  const filterExpr = grid.getCombinedFilter(true);
+		  const dataSource = grid.getDataSource();
+		  const loadOptions = dataSource.loadOptions();
+
+		  dataSource
+			.store()
+			.load({ filter: filterExpr, sort: loadOptions.sort, group: loadOptions.group })
+			.then((result) => {
+				// your code...
+                $("#gridContainer2").dxDataGrid("instance").option("dataSource", result);
+			});
+		}
+</script>

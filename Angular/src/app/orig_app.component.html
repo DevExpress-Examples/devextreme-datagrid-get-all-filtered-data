@@ -1,0 +1,18 @@
+<dx-button text="Get All Filtered And Sorted Data" (onClick)="getFilteredAndSortedData()"></dx-button>
+<dx-data-grid
+  [dataSource]="orders"
+  keyExpr="ID"
+  [showBorders]="true" >
+  <dxo-filter-row [visible]="true" ></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-search-panel [visible]="true" ></dxo-search-panel>
+</dx-data-grid>
+<br>
+<div class="title">Loaded data</div>
+<br>
+<dx-data-grid
+  [dataSource]="ds"
+  keyExpr="ID"
+  [showBorders]="true" >
+</dx-data-grid>
+
