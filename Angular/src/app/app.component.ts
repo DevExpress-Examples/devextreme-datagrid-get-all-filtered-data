@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { ClickEvent } from 'devextreme/ui/button';
+import { Component, ViewChild } from '@angular/core';
+import { DxDataGridComponent } from 'devextreme-angular/ui/data-grid';
+import { isItemsArray } from 'devextreme-angular/common/data';
+import notify from 'devextreme/ui/notify';
+import { AppService, type Order } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +10,32 @@ import { ClickEvent } from 'devextreme/ui/button';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'Angular';
+  @ViewChild(DxDataGridComponent, { static: false }) 
+  dataGrid!: DxDataGridComponent<Order, number>;
 
-  counter = 0;
+  orders: Order[];
+  filteredData: Order[] = [];
 
-  buttonText = 'Click count: 0';
+  constructor(private service: AppService) {
+    this.orders = service.getOrders();
+  }
 
-  onClick(e: ClickEvent): void {
-    this.counter++;
-    this.buttonText = `Click count: ${this.counter}`;
+  getFilteredAndSortedData(): void {
+    const gridInstance = this.dataGrid?.instance;
+    if (!gridInstance) return;
+
+    const filterExpr = gridInstance.getCombinedFilter(true);
+    const dataSource = gridInstance.getDataSource();
+    const loadOptions = dataSource.loadOptions();
+
+    dataSource
+      .store()
+      .load({ filter: filterExpr, sort: loadOptions.sort, group: loadOptions.group })
+      .then((result) => {
+        if (isItemsArray(result)) {
+          this.filteredData = result;
+        }
+      })
+      .catch((error: unknown) => notify(String(error), 'error', 1000));
   }
 }

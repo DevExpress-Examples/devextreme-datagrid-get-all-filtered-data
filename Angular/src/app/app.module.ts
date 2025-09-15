@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
+import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -12,8 +14,9 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     DxButtonModule,
+    DxDataGridModule,
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

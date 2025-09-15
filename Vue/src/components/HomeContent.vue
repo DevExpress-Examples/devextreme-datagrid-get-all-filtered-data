@@ -8,6 +8,7 @@ import type { DxDataGrid as DxDataGridType } from 'devextreme-vue/data-grid';
 import { isItemsArray } from 'devextreme-vue/common/data';
 import notify from 'devextreme/ui/notify';
 import { getOrders, type Order } from '../data';
+import type { LoadResult } from 'devextreme-vue/common/data';
 
 const orders = getOrders();
 const filteredData = ref<Order[]>([]);
@@ -24,9 +25,9 @@ function getFilteredAndSortedData(): void {
   dataSource
     .store()
     .load({ filter: filterExpr, sort: loadOptions.sort, group: loadOptions.group })
-    .then((result) => {
+    .then((result: LoadResult<Order>) => {
       if (isItemsArray(result)) {
-        filteredData.value = result as Order[];
+        filteredData.value = result;
       }
     })
     .catch((error: unknown) => notify(String(error), 'error', 1000));
