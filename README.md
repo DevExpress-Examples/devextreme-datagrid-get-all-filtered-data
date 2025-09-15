@@ -18,16 +18,16 @@ To implement this functionality, access a bound Store object and pass [loadOptio
 ## Files to Review
 
 - **jQuery**
-    - [src.js](jQuery/src/src.js)
+    - [src.js](jQuery/src/index.js)
 - **Angular**
     - [app.component.html](Angular/src/app/app.component.html)
     - [app.component.ts](Angular/src/app/app.component.ts)
 - **Vue**
-    - [App.vue](Vue/src/App.vue)
+    - [Home.vue](Vue/src/components/HomeContent.vue)
 - **React**
-    - [App.js](React/src/App.js)
+    - [App.tsx](React/src/App.tsx)
 - **NetCore**    
-    - [Index.cshtml](ASP/ASP/Pages/Index.cshtml)
+    - [Index.cshtml](ASP.NET%20Core/Views/Home/Index.cshtml)
 
 ## Documentation
 
