@@ -10,13 +10,14 @@ import { AppService, type Order } from './app.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  @ViewChild(DxDataGridComponent, { static: false }) 
-  dataGrid!: DxDataGridComponent<Order, number>;
+  @ViewChild(DxDataGridComponent, { static: false })
+    dataGrid!: DxDataGridComponent<Order, number>;
 
   orders: Order[];
+
   filteredData: Order[] = [];
 
-  constructor(private service: AppService) {
+  constructor(private readonly service: AppService) {
     this.orders = service.getOrders();
   }
 
