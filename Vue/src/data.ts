@@ -1,4 +1,15 @@
-const orders = [{
+export interface Order {
+  ID: number;
+  OrderNumber: number;
+  OrderDate: string;
+  DeliveryDate: string;
+  SaleAmount: number;
+  Terms: string;
+  CustomerStoreCity: string;
+  Employee: string;
+}
+
+const orders: Order[] = [{
   ID: 1,
   OrderNumber: 35703,
   OrderDate: '2017/04/10',
@@ -90,10 +101,6 @@ const orders = [{
   Employee: 'Harv Mudd',
 }];
 
-export default {
-  getOrders() {
-    return orders;
-  },
-};
-
-
+export function getOrders(): Order[] {
+  return orders;
+}
