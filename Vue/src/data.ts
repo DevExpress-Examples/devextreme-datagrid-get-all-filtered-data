@@ -1,21 +1,12 @@
-import { Injectable } from '@angular/core';
-
-export class Order {
-  ID: number | undefined;
-
-  OrderNumber: number| undefined;
-
-  OrderDate: string| undefined;
-
-  DeliveryDate: string| undefined;
-
-  SaleAmount: number| undefined;
-
-  Terms: string| undefined;
-
-  CustomerStoreCity: string| undefined;
-
-  Employee: string| undefined;
+export interface Order {
+  ID: number;
+  OrderNumber: number;
+  OrderDate: string;
+  DeliveryDate: string;
+  SaleAmount: number;
+  Terms: string;
+  CustomerStoreCity: string;
+  Employee: string;
 }
 
 const orders: Order[] = [{
@@ -110,10 +101,6 @@ const orders: Order[] = [{
   Employee: 'Harv Mudd',
 }];
 
-
-@Injectable()
-export class Service {
-  getOrders(): Order[] {
-    return orders;
-  }
+export function getOrders(): Order[] {
+  return orders;
 }
