@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { DxDataGridComponent } from 'devextreme-angular/ui/data-grid';
+import { DxDataGridModule, DxDataGridComponent } from 'devextreme-angular/ui/data-grid';
 import { isItemsArray } from 'devextreme-angular/common/data';
 import notify from 'devextreme/ui/notify';
 import { AppService, type Order } from './app.service';
+import { DxButtonModule } from 'devextreme-angular/ui/button';
 
 @Component({
+  imports: [DxButtonModule, DxDataGridModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
